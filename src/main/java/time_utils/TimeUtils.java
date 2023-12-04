@@ -1,0 +1,45 @@
+package time_utils;
+
+public class TimeUtils {
+
+	private TimeUtils (){}
+	
+    public static int timeToSec(String time) {
+    	String[] part = time.split(":");
+    	
+    	if (part.length != 3) {    		
+    		return -1;
+    	}
+    	
+        int hh = Integer.parseInt(part[0]);
+        int mm = Integer.parseInt(part[1]);
+        int ss = Integer.parseInt(part[2]);
+
+        return 3600 * hh + 60 * mm + ss;
+    }
+
+    public static String secToTime(int a) {
+        int hh, mm, ss;
+
+        a = ((a % 86400) + 86400) % 86400;
+
+        hh = a / 3600;
+        a = a - (3600 * hh);
+        mm = a / 60;
+        ss = a - (60 * mm);
+
+        String res = hh + ":";
+        if (mm < 10) {
+            res = res + "0" + mm + ":";
+        } else {
+            res = res + mm + ":";
+        }
+        if (ss < 10) {
+            res = res + "0" + ss;
+        } else {
+            res = res + ss;
+        }
+
+        return res;
+    }
+}
